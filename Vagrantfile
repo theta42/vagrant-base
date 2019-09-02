@@ -78,7 +78,11 @@ Vagrant.configure("2") do |config|
     cd /vagrant/ops/cookbooks
     rm -rf vendor
     rm -rf $HOME/.berksfile
-    berks update
+    if [ -f ".Berksfile.lock" ]; then
+      berks update
+    else 
+      berks install
+    fi
     berks vendor vendor
   SHELL
 
